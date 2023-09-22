@@ -11,7 +11,7 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Router>
+        <Router basename="/react-book-test-app">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/book/:id" element={<BookDetailPage />} />

@@ -6,7 +6,7 @@ import {
   fetchBooks,
   useAppDispatch,
 } from '../../redux/store';
-import { selectBooksByTitle } from '../../redux/bookSelectors';
+import { selectedBooks } from '../../redux/bookSelectors';
 import styles from './HomePage.module.css';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const searchQuery = useSelector((state: RootState) => state.book.searchQuery);
   let filteredBooks = useSelector((state: RootState) =>
-    selectBooksByTitle(state, searchQuery, currentPage)
+    selectedBooks(state, searchQuery, currentPage)
   );
   const loading = useSelector((state: RootState) => state.book.loading);
   const error = useSelector((state: RootState) => state.book.error);

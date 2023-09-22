@@ -1,6 +1,7 @@
 {
   "name": "react-book-test-app",
   "version": "0.1.0",
+  "homepage": "https://musabdev327.github.io/react-book-test-app",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -25,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -47,7 +50,7 @@
   },
   "devDependencies": {
     "@types/redux-mock-store": "^1.0.3",
+    "gh-pages": "^6.0.0",
     "redux-mock-store": "^1.5.4"
   }
 }
-

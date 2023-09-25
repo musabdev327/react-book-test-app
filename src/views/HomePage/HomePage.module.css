@@ -1,0 +1,77 @@
+.container {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.searchContainer { margin-bottom: 20px }
+
+.input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.results {
+    margin-top: 30px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.paginationButton {
+    margin: 0 100px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin: 0 8px;
+    border-radius: 4px;
+}
+
+.pageNumber {
+    font-size: 18px;
+    margin: 0 8px;
+}
+
+.coverImageContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.coverImage {
+    max-width: 100%;
+    height: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

@@ -1,14 +1,26 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import styles from './BookDetailPage.module.css';
+import {
+    fetchBooks,
+    useAppDispatch,
+} from '../../redux/store';
+
 
 const BookDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const AppDispatch = useAppDispatch();
+    const location = useLocation();
+    const { randomImage } = location.state
     const book = useSelector((state: RootState) =>
         state.book.searchResults.find((item) => item.id == id)
     );
+
+    useEffect(() => {
+        AppDispatch(fetchBooks());
+      }, []);
 
     if (!book) {
         return <p className={styles.errorMessage}>Book not found.</p>;
@@ -20,7 +32,7 @@ const BookDetailPage: React.FC = () => {
                 <h1 className={styles.title}>{book.title}</h1>
                 <div className={styles.coverImageContainer}>
                     <img
-                        src={book.cover_image}
+                        src={book.cover_image || randomImage}
                         alt={`Cover for ${book.title}`}
                         className={styles.coverImage}
                     />

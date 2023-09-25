@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 import './App.css';
-import HomePage from './components/HomePage/HomePage';
-import BookDetailPage from './components/BookDetailPage/BookDetailPage';
+import HomePage from './views/HomePage/HomePage';
+import BookDetailPage from './views/BookDetailPage/BookDetailPage';
 
 function App() {
   return (

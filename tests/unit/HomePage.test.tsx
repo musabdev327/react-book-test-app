@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import HomePage from '../../src/components/HomePage/HomePage';
+import HomePage from '../../src/views/HomePage/HomePage';
 import { Provider } from 'react-redux';
 import store from '../../src/redux/store';
 

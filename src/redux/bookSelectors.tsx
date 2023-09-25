@@ -15,7 +15,11 @@ export const selectedBooks = createSelector(
       : books;
 
     const booksToDisplay = filteredBooks.slice(startIndex, endIndex);
+    const maxPage = Math.ceil(filteredBooks.length / itemsPerPage);
 
-    return booksToDisplay;
+    return {
+      booksToDisplay,
+      maxPage,
+    };
   }
 );

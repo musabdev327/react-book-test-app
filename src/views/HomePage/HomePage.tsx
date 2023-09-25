@@ -15,13 +15,12 @@ const HomePage: React.FC = () => {
   const AppDispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const searchQuery = useSelector((state: RootState) => state.book.searchQuery);
-  let filteredBooks = useSelector((state: RootState) =>
+  const { booksToDisplay, maxPage } = useSelector((state: RootState) =>
     selectedBooks(state, searchQuery, currentPage)
   );
   const loading = useSelector((state: RootState) => state.book.loading);
   const error = useSelector((state: RootState) => state.book.error);
-  const searchResults = useSelector((state: RootState) => state.book.searchResults);
-  const maxPages = Math.ceil(searchResults.length / 5);
+
 
   useEffect(() => {
     AppDispatch(fetchBooks());
@@ -34,6 +33,14 @@ const HomePage: React.FC = () => {
 
     return () => clearTimeout(debounceTimer);
   }, [searchQuery]);
+
+  const getRandomImage = () => {
+    const randomImages = ['https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpP-TqlC_wJRlyQ8P0tlAZ58v2S_LkvxSJgQ&usqp=CAU'
+    ]
+    const randomIndex = Math.floor(Math.random() * randomImages.length);
+    return randomImages[randomIndex];
+  };
 
   return (
     <div className={styles.container}>
@@ -50,9 +57,16 @@ const HomePage: React.FC = () => {
       {loading && <p className={styles.loading}>Loading...</p>}
       {error && <p className={styles.error}>{error}</p>}
       <ol className={styles.results}>
-        {filteredBooks.map((book) => (
+        {booksToDisplay.map((book) => (
           <li key={book.id} className={styles.resultsItem}>
-            <Link to={`/book/${book.id}`}>{book.title}</Link>
+            <Link to={`/book/${book.id}`} state={{ randomImage: book.cover_image ? '' : getRandomImage() }}>{book.title}</Link>
+            {searchQuery && <div className={styles.coverImageContainer}>
+              <img
+                  src={book.cover_image || getRandomImage()}
+                  alt={`Cover for ${book.title}`}
+                  className={styles.coverImage}
+              />
+            </div>}
           </li>
         ))}
       </ol>
@@ -68,14 +82,14 @@ const HomePage: React.FC = () => {
         >
           Previous
         </button>
-        <span className={styles.pageNumber}>Page {currentPage}</span>
+        <span className={styles.pageNumber}>Page {currentPage} of {maxPage}</span>
         <button
           onClick={() => {
-            if (currentPage < maxPages) {
+            if (currentPage < maxPage) {
               setCurrentPage(currentPage + 1);
             }
           }}
-          disabled={currentPage === maxPages}
+          disabled={currentPage === maxPage}
           className={`${styles.button} ${styles.paginationButton}`}
         >
           Next
